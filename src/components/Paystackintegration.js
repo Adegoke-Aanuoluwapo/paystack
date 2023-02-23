@@ -8,7 +8,23 @@ const Paystackintegration = () => {
   const [lastName, setLirstName] = useState("");
   const paywithpaystack = (e) => {
     e.preventDefault();
-    alert("please fill all boxes");
+
+    const paystack = new PaystackPop(
+      paystack.newTransaction({
+        key: "pk-test_8a7597f7dd06572719f20a315cf00871def662ff",
+        amount: amount,
+        email,
+        firstName,
+        lastName,
+        onSuccess(transaction) {
+          let message = `Payment Complete! reference ${transaction.reference}`;
+          alert(message);
+        },
+        onCancel() {
+          alert("You have cancelled the transaction");
+        },
+      })
+    );
   };
   return (
     <div className="w3-container W3-row">
